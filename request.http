@@ -1,0 +1,56 @@
+GET http://localhost:8080/api/countries
+Accept: application/json
+
+###
+GET http://localhost:8080/api/continents
+Accept: application/json
+
+###
+GET http://localhost:8080/api/continents/Europa/countries
+Accept: application/json
+###
+POST http://localhost:8080/api/countries
+Content-Type: application/json
+
+{
+ "name": "Wegry",
+ "capitalCity": "Budapeszt",
+ "perCapitaGDP": 1,
+ "continent": "Europa"
+}
+###
+POST http://localhost:8080/api/continents
+Content-Type: application/json
+
+{
+  "name": "Afryka",
+  "area": 30370000,
+  "populationDensity": 46.1
+}
+###
+GET http://localhost:8080/api/continents/Afryka
+Accept: application/json
+
+###
+GET http://localhost:8080/api/countries/Wegry
+
+###
+PUT http://localhost:8080/api/countries/Wegry
+Content-Type: application/json
+
+{
+  "capitalCity": "Peszt",
+  "perCapitaGDP": 1000
+}
+###
+PUT http://localhost:8080/api/continents/Afryka
+Content-Type: application/json
+
+{
+  "area": 10370000,
+  "populationDensity": 20.1
+}
+###
+DELETE http://localhost:8080/api/continents/Ameryka Polnocna
+###
+DELETE http://localhost:8080/api/countries/Wegry
