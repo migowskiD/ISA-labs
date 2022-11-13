@@ -39,9 +39,6 @@ public class ContinentController {
 
     @PostMapping
     public ResponseEntity<Void> postContinent(@RequestBody PostContinentRequest request) {
-        continentService.find(request.getName()).ifPresent(s -> {
-            throw new RuntimeException("Continent with this name already exists!");
-        });
         Continent continent = PostContinentRequest
                 .dtoToEntityMapper()
                 .apply(request);
