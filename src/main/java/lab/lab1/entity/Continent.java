@@ -23,17 +23,7 @@ public class Continent implements Serializable {
     @Id
     private String name;
 
-    /**
-     * Area of continent in square kilometers
-     */
-    private int area;
-
-    /**
-     * People per square kilometer
-     */
-    private double populationDensity;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "continent")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "continent")
     @ToString.Exclude
     private List<Country> countries;
 }

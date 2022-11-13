@@ -17,15 +17,9 @@ public class PostContinentRequest {
 
     private String name;
 
-    private int area;
-
-    private double populationDensity;
-
     public static Function<PostContinentRequest, Continent> dtoToEntityMapper() {
         return request -> Continent.builder()
                 .name(request.getName())
-                .area(request.getArea())
-                .populationDensity(request.getPopulationDensity())
                 .build();
     }
 }

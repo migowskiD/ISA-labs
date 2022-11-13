@@ -26,15 +26,11 @@ public class ContinentService {
         return repository.findAll();
     }
     @Transactional
-    public Continent create(Continent continent) {
-        return repository.save(continent);
-    }
-    @Transactional
-    public void update(Continent continent) {
+    public void create(Continent continent) {
         repository.save(continent);
     }
     @Transactional
-    public void delete(String name) {
-        repository.deleteById(name);
+    public void delete(Continent continent) {
+        repository.delete(continent);
     }
 }

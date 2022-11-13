@@ -26,20 +26,14 @@ public class InitializedData {
     private synchronized void init() {
         Continent europa = Continent.builder()
                 .name("Europa")
-                .area(10180000)
-                .populationDensity(72.9)
                 .build();
 
         Continent azja = Continent.builder()
                 .name("Azja")
-                .area(44579000)
-                .populationDensity(100.0)
                 .build();
 
         Continent amerykaPolnocna = Continent.builder()
                 .name("Ameryka Polnocna")
-                .area(24709000)
-                .populationDensity(25.7)
                 .build();
 
         continentService.create(europa);
