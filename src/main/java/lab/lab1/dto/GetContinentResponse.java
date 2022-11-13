@@ -1,7 +1,6 @@
 package lab.lab1.dto;
 
 import lab.lab1.entity.Continent;
-import lab.lab1.entity.Country;
 import lombok.*;
 
 import java.util.function.Function;

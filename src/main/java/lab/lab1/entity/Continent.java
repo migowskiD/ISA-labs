@@ -32,8 +32,4 @@ public class Continent implements Serializable {
      * People per square kilometer
      */
     private double populationDensity;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "continent")
-    @ToString.Exclude
-    private List<Country> countries;
 }

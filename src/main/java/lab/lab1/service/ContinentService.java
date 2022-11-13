@@ -1,6 +1,7 @@
 package lab.lab1.service;
 
 import lab.lab1.entity.Continent;
+import lab.lab1.event.repository.ContinentEventRepository;
 import lab.lab1.repository.ContinentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,9 +14,13 @@ import java.util.Optional;
 public class ContinentService {
     private ContinentRepository repository;
 
+    private ContinentEventRepository eventRepository;
+
+
     @Autowired
-    public ContinentService(ContinentRepository repository) {
+    public ContinentService(ContinentRepository repository, ContinentEventRepository eventRepository) {
         this.repository = repository;
+        this.eventRepository = eventRepository;
     }
 
     public Optional<Continent> find(String name) {
@@ -26,15 +31,18 @@ public class ContinentService {
         return repository.findAll();
     }
     @Transactional
-    public Continent create(Continent continent) {
-        return repository.save(continent);
+    public void create(Continent continent) {
+        repository.save(continent);
+        eventRepository.create(continent);
+
     }
     @Transactional
     public void update(Continent continent) {
         repository.save(continent);
     }
     @Transactional
-    public void delete(String name) {
-        repository.deleteById(name);
+    public void delete(Continent continent) {
+        repository.delete(continent);
+        eventRepository.delete(continent);
     }
 }
