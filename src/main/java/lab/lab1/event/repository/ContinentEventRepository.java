@@ -14,7 +14,7 @@ public class ContinentEventRepository  {
     private RestTemplate restTemplate;
 
     @Autowired
-    public ContinentEventRepository(@Value("${url}") String baseUrl) {
+    public ContinentEventRepository(@Value("${countries.url}") String baseUrl) {
         restTemplate = new RestTemplateBuilder().rootUri(baseUrl).build();
     }
 
