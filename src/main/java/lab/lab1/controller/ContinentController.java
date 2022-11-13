@@ -29,16 +29,17 @@ public class ContinentController {
         this.continentService = continentService;
     }
 
-    @PostMapping
-    public ResponseEntity<Void> postContinent(@RequestBody PostContinentRequest request) {
-        continentService.find(request.getName()).ifPresent(s -> {
-            throw new RuntimeException("Continent with this name already exists!");
-        });
+    @PostMapping("")
+    public ResponseEntity<Void> postContinent(@RequestBody PostContinentRequest request, UriComponentsBuilder builder) {
         Continent continent = PostContinentRequest
                 .dtoToEntityMapper()
                 .apply(request);
         continentService.create(continent);
-        return ResponseEntity.created(URI.create(String.format("continents/%s",continent.getName()))).build();
+        return ResponseEntity
+                .created(builder
+                        .pathSegment("api", "continents", "{id")
+                        .buildAndExpand(continent.getName()).toUri())
+                .build();
     }
 
     @DeleteMapping("{id}")
