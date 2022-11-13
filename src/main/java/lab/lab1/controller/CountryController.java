@@ -50,9 +50,6 @@ public class CountryController {
 
     @PostMapping
     public ResponseEntity<Void> postCountry(@RequestBody PostCountryRequest request) {
-        countryService.find(request.getName()).ifPresent(s -> {
-            throw new RuntimeException("Country with this name already exists!");
-        });
         Country country = PostCountryRequest
                 .dtoToEntityMapper(name -> continentService.find(name).orElseThrow())
                 .apply(request);
