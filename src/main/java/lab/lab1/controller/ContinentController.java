@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.Collection;
@@ -37,13 +38,17 @@ public class ContinentController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    public ResponseEntity<Void> postContinent(@RequestBody PostContinentRequest request) {
+    @PostMapping("")
+    public ResponseEntity<Void> postContinent(@RequestBody PostContinentRequest request, UriComponentsBuilder builder) {
         Continent continent = PostContinentRequest
                 .dtoToEntityMapper()
                 .apply(request);
         continentService.create(continent);
-        return ResponseEntity.created(URI.create(String.format("continents/%s",continent.getName()))).build();
+        return ResponseEntity
+                .created(builder
+                        .pathSegment("api", "continents", "{id")
+                        .buildAndExpand(continent.getName()).toUri())
+                .build();
     }
 
     @PutMapping("{id}")
