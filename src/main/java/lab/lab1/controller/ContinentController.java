@@ -29,7 +29,7 @@ public class ContinentController {
         this.continentService = continentService;
     }
 
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<Void> postContinent(@RequestBody PostContinentRequest request, UriComponentsBuilder builder) {
         Continent continent = PostContinentRequest
                 .dtoToEntityMapper()

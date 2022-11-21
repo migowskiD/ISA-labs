@@ -49,12 +49,16 @@ public class CountryController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> postCountry(@RequestBody PostCountryRequest request) {
+    public ResponseEntity<Void> postCountry(@RequestBody PostCountryRequest request, UriComponentsBuilder builder) {
         Country country = PostCountryRequest
                 .dtoToEntityMapper(name -> continentService.find(name).orElseThrow())
                 .apply(request);
         country = countryService.create(country);
-        return ResponseEntity.created(URI.create(String.format("countries/%s",country.getName()))).build();
+        return ResponseEntity
+                .created(builder
+                        .pathSegment("api", "countries", "{id}")
+                        .buildAndExpand(country.getName()).toUri())
+                .build();
     }
 
     @PutMapping("{id}")
