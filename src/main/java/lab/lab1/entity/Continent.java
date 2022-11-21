@@ -33,7 +33,7 @@ public class Continent implements Serializable {
      */
     private double populationDensity;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "continent")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "continent", cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Country> countries;
 }

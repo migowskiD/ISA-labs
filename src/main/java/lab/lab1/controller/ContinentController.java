@@ -2,21 +2,14 @@ package lab.lab1.controller;
 
 import lab.lab1.dto.*;
 import lab.lab1.entity.Continent;
-import lab.lab1.entity.Country;
-import lab.lab1.service.ContinentService;
 import lab.lab1.service.ContinentService;
 import lab.lab1.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
-import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
 
 @RestController
 @RequestMapping("api/continents")
@@ -32,12 +25,9 @@ public class ContinentController {
         this.continentService = continentService;
     }
 
-    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping
     public ResponseEntity<GetContinentsResponse> getContinents() {
-        List<Continent> all = continentService.findAll();
-        Function<Collection<Continent>, GetContinentsResponse> mapper = GetContinentsResponse.entityToDtoMapper();
-        GetContinentsResponse response = mapper.apply(all);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(GetContinentsResponse.entityToDtoMapper().apply(continentService.findAll()));
     }
 
     @GetMapping("{id}")
@@ -48,7 +38,7 @@ public class ContinentController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> postContinent(@RequestBody PostContinentRequest request) {
+    public ResponseEntity<Void> postContinent(@RequestBody PostContinentRequest request, UriComponentsBuilder builder) {
         continentService.find(request.getName()).ifPresent(s -> {
             throw new RuntimeException("Continent with this name already exists!");
         });
@@ -56,7 +46,11 @@ public class ContinentController {
                 .dtoToEntityMapper()
                 .apply(request);
         continent = continentService.create(continent);
-        return ResponseEntity.created(URI.create(String.format("continents/%s",continent.getName()))).build();
+        return ResponseEntity
+                .created(builder
+                        .pathSegment("api", "continents", "{id}")
+                        .buildAndExpand(continent.getName()).toUri())
+                .build();
     }
 
     @PutMapping("{id}")
@@ -71,22 +65,10 @@ public class ContinentController {
         }
     }
 
-    @GetMapping("{id}/countries")
-    public ResponseEntity<GetCountriesResponse> getContinentsCountries(@PathVariable("id") String id){
-        Optional<Continent> continent = continentService.find(id);
-        return continent
-                .map(value -> ResponseEntity.ok(GetCountriesResponse.entityToDtoMapper().apply(value.getCountries())))
-                .orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteContinent(@PathVariable("id") String id){
         Optional<Continent> continent = continentService.find(id);
         if(continent.isPresent()){
-            List<Country> countryList = continent.get().getCountries();
-            for(Country country : countryList){
-                countryService.delete(country.getName());
-            }
             continentService.delete(continent.get().getName());
             return ResponseEntity.accepted().build();
         }

@@ -8,16 +8,12 @@ import lab.lab1.entity.Country;
 import lab.lab1.service.ContinentService;
 import lab.lab1.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
-import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
 
 @RestController
 @RequestMapping("api/countries")
@@ -33,12 +29,9 @@ public class CountryController {
         this.continentService = continentService;
     }
 
-    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping
     public ResponseEntity<GetCountriesResponse> getCountries() {
-        List<Country> all = countryService.findAll();
-        Function<Collection<Country>, GetCountriesResponse> mapper = GetCountriesResponse.entityToDtoMapper();
-        GetCountriesResponse response = mapper.apply(all);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(GetCountriesResponse.entityToDtoMapper().apply(countryService.findAll()));
     }
 
     @GetMapping("{id}")
@@ -49,7 +42,7 @@ public class CountryController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> postCountry(@RequestBody PostCountryRequest request) {
+    public ResponseEntity<Void> postCountry(@RequestBody PostCountryRequest request, UriComponentsBuilder builder) {
         countryService.find(request.getName()).ifPresent(s -> {
             throw new RuntimeException("Country with this name already exists!");
         });
@@ -57,7 +50,11 @@ public class CountryController {
                 .dtoToEntityMapper(name -> continentService.find(name).orElseThrow())
                 .apply(request);
         country = countryService.create(country);
-        return ResponseEntity.created(URI.create(String.format("countries/%s",country.getName()))).build();
+        return ResponseEntity
+                .created(builder
+                        .pathSegment("api", "countries", "{id}")
+                        .buildAndExpand(country.getName()).toUri())
+                .build();
     }
 
     @PutMapping("{id}")

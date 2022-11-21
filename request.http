@@ -19,6 +19,15 @@ Content-Type: application/json
  "continent": "Europa"
 }
 ###
+POST http://localhost:8080/api/continents/Azja/countries
+Content-Type: application/json
+
+{
+  "name": "Japonia",
+  "capitalCity": "Tokio",
+  "perCapitaGDP": 20
+}
+###
 POST http://localhost:8080/api/continents
 Content-Type: application/json
 
@@ -54,3 +63,17 @@ Content-Type: application/json
 DELETE http://localhost:8080/api/continents/Ameryka Polnocna
 ###
 DELETE http://localhost:8080/api/countries/Wegry
+###
+PUT http://localhost:8080/api/continents/Azja/countries/Japonia
+Content-Type: application/json
+
+{
+  "capitalCity": "Kioto",
+  "perCapitaGDP": 240000
+}
+###
+GET http://localhost:8080/api/continents/Azja/countries/Japonia
+###
+DELETE http://localhost:8080/api/continents/Azja/countries/Japonia
+###
+GET http://localhost:8080/api/continents/Azja/countries
