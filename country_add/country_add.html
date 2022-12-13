@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>ISA labs</title>
+    <link rel="stylesheet" href="../styles.css"/>
+    <script src="../script.js" defer="defer"></script>
+    <script type="module" src="country_add.js" defer="defer"></script>
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <h1>ISA lab 4</h1>
+    </header>
+
+    <nav class="navigation-bar">
+        <ul>
+            <li><a href="../index.html">main</a></li>
+            <li><a href="../continent_list/continent_list.html">continents</a></li>
+        </ul>
+    </nav>
+
+    <section class="main-section">
+        <article>
+            <header><h2>Add new country details</h2></header>
+            <form id="infoForm">
+                <label for="name">Name:</label>
+                <input id="name" name="name"/>
+                <label for="capitalCity">Capital city:</label>
+                <input id="capitalCity" name="capitalCity"/>
+                <label for="perCapitaGDP">GDP per capita:</label>
+                <input id="perCapitaGDP" name="perCapitaGDP" type="number"/>
+                <input type="submit" name="Update"/>
+            </form>
+        </article>
+    </section>
+</div>
+</body>
+</html>

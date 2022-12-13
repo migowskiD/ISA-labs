@@ -2,5 +2,11 @@
   "name": "ISA-labs",
   "version": "1.0.0",
   "dependencies": {
+  },
+  "scripts": {
+    "dev": "http-server -p 8083 -c-1"
+  },
+  "devDependencies": {
+    "http-server": "0.12.3"
   }
 }

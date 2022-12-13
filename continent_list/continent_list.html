@@ -4,7 +4,8 @@
     <meta charset="UTF-8"/>
     <title>ISA labs</title>
     <link rel="stylesheet" href="../styles.css"/>
-    <script src="../script.js" async="async"></script>
+    <script src="../script.js" defer="defer"></script>
+    <script type="module" src="continent_list.js" defer="defer"></script>
 </head>
 <body>
 <div class="container">
@@ -20,13 +21,15 @@
     </nav>
 
     <section class="main-section">
-        <article class="text--justified">
+        <article>
             <header><h2>Continents</h2></header>
+            <a href="../continent_add/continent_add.html"><button>add</button></a>
             <table class="data-table">
                 <thead>
                 <tr>
                     <th>name</th>
                     <th>view</th>
+                    <th>edit</th>
                     <th>delete</th>
                 </tr>
                 </thead>
@@ -34,8 +37,9 @@
                 <tr>
                     <td>name</td>
                     <td><a href="#">view</a></td>
+                    <td><a href="#">edit</a></td>
                     <td>
-                        <button class="ui-button ui-control">delete</button>
+                        <button>delete</button>
                     </td>
                 </tr>
                 </tbody>
