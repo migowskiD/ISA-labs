@@ -62,6 +62,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>lab3-country</finalName>
 	</build>
 
 </project>

@@ -37,7 +37,7 @@ public class ContinentController {
         continentService.create(continent);
         return ResponseEntity
                 .created(builder
-                        .pathSegment("api", "continents", "{id")
+                        .pathSegment("api", "continents", "{id}")
                         .buildAndExpand(continent.getName()).toUri())
                 .build();
     }
