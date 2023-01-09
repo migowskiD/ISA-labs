@@ -61,6 +61,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>lab3-gateway</finalName>
 	</build>
 
 </project>
