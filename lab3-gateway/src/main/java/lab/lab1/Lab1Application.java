@@ -23,15 +23,15 @@ public class Lab1Application {
 		return builder
 				.routes()
 				.route("continents", r -> r
-						.host("*")
+						.host("localhost")
 						.and()
 						.path("/api/continents/{id}", "/api/continents")
-						.uri("http://aui-lab3-continent-1:8081"))
+						.uri("http://continent:8081"))
 				.route("countries", r -> r
-						.host("*")
+						.host("localhost")
 						.and()
 						.path("/api/countries", "/api/countries/*", "/api/continents/{continent}/countries", "/api/continents/{continent}/countries/*")
-						.uri("http://aui-lab3-country-1:8082"))
+						.uri("http://country:8082"))
 				.build();
 	}
 
