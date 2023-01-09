@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>ISA labs</title>
+    <link rel="stylesheet" href="../styles.css"/>
+    <script src="../script.js" defer="defer"></script>
+    <script type="module" src="continent_list.js" defer="defer"></script>
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <h1>ISA lab 4</h1>
+    </header>
+
+    <nav class="navigation-bar">
+        <ul>
+            <li><a href="../index.html">main</a></li>
+            <li><a href="continent_list.html">continents</a></li>
+        </ul>
+    </nav>
+
+    <section class="main-section">
+        <article>
+            <header><h2>Continents</h2></header>
+            <a href="../continent_add/continent_add.html"><button>add</button></a>
+            <table class="data-table">
+                <thead>
+                <tr>
+                    <th>name</th>
+                    <th>view</th>
+                    <th>edit</th>
+                    <th>delete</th>
+                </tr>
+                </thead>
+                <tbody id="tableBody">
+                <tr>
+                    <td>name</td>
+                    <td><a href="#">view</a></td>
+                    <td><a href="#">edit</a></td>
+                    <td>
+                        <button>delete</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </article>
+    </section>
+</div>
+</body>
+</html>

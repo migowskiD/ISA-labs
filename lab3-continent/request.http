@@ -1,0 +1,23 @@
+###
+GET http://localhost:8081/api/continents
+Accept: application/json
+###
+POST http://localhost:8082/api/continents
+Content-Type: application/json
+
+{
+  "name": "Afryka"
+}
+###
+GET http://localhost:8081/api/continents/Afryka
+Accept: application/json
+###
+PUT http://localhost:8081/api/continents/Afryka
+Content-Type: application/json
+
+{
+  "area": 10370000,
+  "populationDensity": 20.1
+}
+###
+DELETE http://localhost:8081/api/continents/Europa

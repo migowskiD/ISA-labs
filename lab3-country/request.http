@@ -1,0 +1,34 @@
+GET http://localhost:8082/api/countries
+Accept: application/json
+###
+GET http://localhost:8082/api/countries/Wegry
+Accept: application/json
+###
+POST http://localhost:8082/api/countries
+Content-Type: application/json
+
+{
+ "name": "Wegry",
+ "capitalCity": "Budapeszt",
+ "perCapitaGDP": 1,
+ "continent": "Europa"
+}
+###
+POST http://localhost:8082/api/continents
+Content-Type: application/json
+
+{
+  "name": "Afryka",
+}
+###
+PUT http://localhost:8082/api/countries/Wegry
+Content-Type: application/json
+
+{
+  "capitalCity": "Peszt",
+  "perCapitaGDP": 1000
+}
+###
+DELETE http://localhost:8082/api/continents/Ameryka Polnocna
+###
+DELETE http://localhost:8082/api/countries/Wegry
