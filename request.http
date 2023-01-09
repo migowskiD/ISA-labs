@@ -2,13 +2,11 @@
 GET http://localhost:8081/api/continents
 Accept: application/json
 ###
-POST http://localhost:8081/api/continents
+POST http://localhost:8082/api/continents
 Content-Type: application/json
 
 {
-  "name": "Afryka",
-  "area": 30370000,
-  "populationDensity": 46.1
+  "name": "Afryka"
 }
 ###
 GET http://localhost:8081/api/continents/Afryka
